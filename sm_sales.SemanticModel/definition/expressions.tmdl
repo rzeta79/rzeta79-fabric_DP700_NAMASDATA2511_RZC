@@ -1,0 +1,11 @@
+expression 'DirectLake - Silver_Refined' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/32422c8b-1ef6-4e8f-a861-012d03453d6c/845a6548-8113-48d9-b9e2-1eab240b8679", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 15536b9c-f4a1-4676-87f7-5b95a3dc55b5
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[dim_cliente_tcredito]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[dim_tarjeta_credito]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[ft_tipo_cambio_dia]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[dim_monedas]"}},"objectType":"Table"}]
+

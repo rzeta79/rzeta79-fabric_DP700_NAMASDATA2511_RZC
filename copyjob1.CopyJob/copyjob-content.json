@@ -1,0 +1,445 @@
+{
+  "properties": {
+    "jobMode": "Batch",
+    "source": {
+      "type": "AzurePostgreSqlTable",
+      "connectionSettings": {
+        "type": "AzurePostgreSql",
+        "externalReferences": {
+          "connection": "606214f4-bf32-4b02-9068-26bbfc92dd17"
+        }
+      }
+    },
+    "destination": {
+      "type": "LakehouseTable",
+      "connectionSettings": {
+        "type": "Lakehouse",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "artifactId": "50040fd3-183f-8e17-43de-df7f1aa2af41",
+          "rootFolder": "Tables"
+        },
+        "externalReferences": {
+          "connection": "a2906aa9-152c-422b-a28d-83f6ff7e0df2"
+        }
+      }
+    },
+    "policy": {
+      "timeout": "0.12:00:00"
+    }
+  },
+  "activities": [
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "countryregioncurrency"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_countryregioncurrency"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "creditcard"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_creditcard"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "currency"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_currency"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "currencyrate"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_currencyrate"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "personcreditcard"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_personcreditcard"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "salesorderheadersalesreason"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_salesorderheadersalesreason"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "salesreason"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_salesreason"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "ae017925156898",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "shoppingcartitem"
+          }
+        },
+        "destination": {
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "table": "sales_shoppingcartitem"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "d29f5a6d-40ab-474a-9db1-04e2292bedd7",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "countryregioncurrency"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_countryregioncurrency"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "5fcbc18c-4c87-4f34-b0e4-93d608f72fea",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "creditcard"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_creditcard"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "4c2b468d-a836-450e-9953-616b6d4ebdf9",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "currency"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_currency"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "81a95a04-e986-4fb6-8e0c-f4b684da85a4",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "personcreditcard"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_personcreditcard"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "af17db55-b0a3-4f2e-9bd7-ee4e911bf950",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "salesorderheadersalesreason"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_salesorderheadersalesreason"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "99826998-9162-419e-867f-4382a6d8b9c0",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "salesreason"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_salesreason"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "a559dce0-6239-4ae3-bfcd-fcf83803c3a6",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "sales",
+            "table": "shoppingcartitem"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "table": "sales_shoppingcartitem"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    }
+  ]
+}
