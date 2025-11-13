@@ -1,0 +1,140 @@
+{
+  "schema_version": 63,
+  "tiles": [
+    {
+      "id": "86f20504-7152-433f-aebd-eb5e0ce66232",
+      "queryRef": {
+        "kind": "query",
+        "queryId": "ad6d70ae-96eb-41a6-8779-0f0df2a884bd"
+      },
+      "title": "hot_metereologia Table Preview",
+      "visualType": "table",
+      "pageId": "66a34f12-9b1c-4b05-8157-62bcaa854e6c",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 11,
+        "height": 12
+      },
+      "visualOptions": {}
+    },
+    {
+      "id": "605dd1fc-bbcd-4208-a3a8-31f9f265550f",
+      "title": "chart_temp",
+      "visualType": "line",
+      "pageId": "66a34f12-9b1c-4b05-8157-62bcaa854e6c",
+      "layout": {
+        "x": 11,
+        "y": 0,
+        "width": 10,
+        "height": 12
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "d67d6f23-92b1-46c5-a37e-679ed1ffe1a7"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [
+            {
+              "id": "46bf8f94-fd76-4b55-a484-8fa8a507f095",
+              "columns": [
+                "longitud"
+              ],
+              "label": "",
+              "yAxisMaximumValue": null,
+              "yAxisMinimumValue": null,
+              "yAxisScale": "linear",
+              "horizontalLines": []
+            }
+          ],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": "hora",
+        "yColumns": [
+          "TempMax",
+          "TempMin",
+          "latitud",
+          "longitud"
+        ],
+        "seriesColumns": [
+          "fecha"
+        ],
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "drillthrough": []
+      }
+    }
+  ],
+  "baseQueries": [],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "6689ac52-71ac-477d-9f84-8f2100cca692",
+      "displayName": "Time range",
+      "description": "",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 1,
+        "unit": "hours"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "eefe2afa-1f00-4d8c-8e94-f5440474ef32",
+      "kind": "kusto-trident",
+      "clusterUri": "",
+      "database": "b580a52d-5271-b530-4b68-18af38324e1d",
+      "name": "eh_analitica_streaming",
+      "scopeId": "kusto-trident",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Page 1",
+      "id": "66a34f12-9b1c-4b05-8157-62bcaa854e6c"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "eefe2afa-1f00-4d8c-8e94-f5440474ef32"
+      },
+      "text": "['hot_metereologia'] | take 10",
+      "id": "ad6d70ae-96eb-41a6-8779-0f0df2a884bd",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "eefe2afa-1f00-4d8c-8e94-f5440474ef32"
+      },
+      "text": "hot_metereologia\n| extend dt = todatetime(dateTime)\n| extend tempArray = parse_json(temperature)\n| mv-expand tempArray\n| extend valor = todouble(tempArray.value)\n| extend loc = parse_json(location)\n| extend latitud = todouble(loc.latitude),\n         longitud = todouble(loc.longitude)\n| extend fecha = format_datetime(dt, \"yyyy-MM-dd\"),\n         hora  = format_datetime(dt, \"HH:mm:ss\")\n| summarize\n      TempMax = max(valor),\n      TempMin = min(valor),\n      latitud = any(latitud),\n      longitud = any(longitud)\n  by fecha, hora\n| order by fecha desc, hora desc\n",
+      "id": "d67d6f23-92b1-46c5-a37e-679ed1ffe1a7",
+      "usedVariables": []
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+table 'Kusto Query Result'
+	lineageTag: 7f5faf33-22e1-4ab6-bdd5-717d1df6cc09
+
+	column fecha
+		dataType: string
+		lineageTag: f1e2d9ff-e1dc-4cc8-a044-ed8dafe3b34e
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora
+		dataType: string
+		lineageTag: 2cf3fa82-a3c2-476b-885d-460552ccf4b8
+		summarizeBy: none
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column TempMax
+		dataType: double
+		lineageTag: c78de2c5-b18f-4c16-a899-46baf4663379
+		summarizeBy: sum
+		sourceColumn: TempMax
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TempMin
+		dataType: double
+		lineageTag: e31566ea-6e24-476e-a042-7d84bfe7a1f4
+		summarizeBy: sum
+		sourceColumn: TempMin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column latitud
+		dataType: double
+		lineageTag: ba1aac62-a85b-4572-8837-4c9305acde7d
+		summarizeBy: sum
+		sourceColumn: latitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitud
+		dataType: double
+		lineageTag: cc974b29-334c-4fd6-9303-21d58cfb37d7
+		summarizeBy: sum
+		sourceColumn: longitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Kusto Query Result' = m
+		mode: directQuery
+		source =
+				let
+				Source = AzureDataExplorer.Contents("https://trd-5arkz0ttp0jhc35snt.z2.kusto.fabric.microsoft.com", "38324e1d-18af-4b68-b530-5271b580a52d", "hot_metereologia
+				| extend dt = todatetime(dateTime)
+				| extend tempArray = parse_json(temperature)
+				| mv-expand tempArray
+				| extend valor = todouble(tempArray.value)
+				| extend loc = parse_json(location)
+				| extend latitud = todouble(loc.latitude),
+				         longitud = todouble(loc.longitude)
+				| extend fecha = format_datetime(dt, ""yyyy-MM-dd""),
+				         hora  = format_datetime(dt, ""HH:mm:ss"")
+				| summarize
+				      TempMax = max(valor),
+				      TempMin = min(valor),
+				      latitud = any(latitud),
+				      longitud = any(longitud)
+				  by fecha, hora
+				| order by fecha desc, hora desc
+				
+				", [])
+				in
+				Source
+
+	annotation PBI_ResultType = Table
+

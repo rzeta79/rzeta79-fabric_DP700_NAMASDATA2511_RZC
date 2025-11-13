@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDashboard",
+    "displayName": "real_time_streaming",
+    "description": "real_time_streaming"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e39b9144-fa23-bbcc-4a89-eeaa8bd67063"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "sources": [
+    {
+      "id": "2e74c750-771b-4d71-9153-0242c085dcda",
+      "name": "new-source",
+      "type": "RealTimeWeather",
+      "properties": {
+        "latitude": 40.415519,
+        "longitude": -82.709374
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "7734da00-87ee-469d-8118-3d57225143ff",
+      "name": "DYKiI41RBkxWwiP3sNNAAJ-dafc9452-c261-494a-a3de-dde56ab37a02",
+      "type": "Activator",
+      "properties": {
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "6ab37a02-dde5-a3de-494a-c261dafc9452",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "new_event_stream-stream"
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "e67adb9e-de09-499f-b119-c3c9ab719bc1",
+      "name": "new_event_stream-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": []
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.0"
+}
