@@ -1,0 +1,202 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": true,
+          "items": {
+            "value": "@pipeline().parameters.tablas",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "AzurePostgreSqlSource",
+                  "partitionOption": "None",
+                  "queryTimeout": "02:00:00",
+                  "datasetSettings": {
+                    "type": "AzurePostgreSqlTable",
+                    "typeProperties": {
+                      "table": {
+                        "value": "@item()",
+                        "type": "Expression"
+                      },
+                      "schema": "production"
+                    },
+                    "version": "2.0",
+                    "schema": [],
+                    "externalReferences": {
+                      "connection": "606214f4-bf32-4b02-9068-26bbfc92dd17"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "LakehouseTableSink",
+                  "tableActionOption": "OverwriteSchema",
+                  "applyVOrder": true,
+                  "partitionOption": "None",
+                  "datasetSettings": {
+                    "type": "LakehouseTable",
+                    "typeProperties": {
+                      "table": {
+                        "value": "@concat(\r\n    'production_',item())",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "connectionSettings": {
+                      "name": "Bronze_Landing",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "1aa2af41-df7f-43de-8e17-183f50040fd3",
+                          "workspaceId": "32422c8b-1ef6-4e8f-a861-012d03453d6c",
+                          "rootFolder": "Tables"
+                        },
+                        "externalReferences": {
+                          "connection": "a2906aa9-152c-422b-a28d-83f6ff7e0df2"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "data esquema produccion",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "iterador bbdd",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": []
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": true,
+          "items": {
+            "value": "@pipeline().parameters.tablas",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "AzurePostgreSqlSource",
+                  "partitionOption": "None",
+                  "queryTimeout": "02:00:00",
+                  "datasetSettings": {
+                    "type": "AzurePostgreSqlTable",
+                    "typeProperties": {
+                      "table": {
+                        "value": "@item()",
+                        "type": "Expression"
+                      },
+                      "schema": "production"
+                    },
+                    "version": "2.0",
+                    "schema": [],
+                    "externalReferences": {
+                      "connection": "606214f4-bf32-4b02-9068-26bbfc92dd17"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "ParquetSink",
+                  "formatSettings": {
+                    "type": "ParquetWriteSettings",
+                    "enableVertiParquet": true
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseWriteSettings"
+                  },
+                  "datasetSettings": {
+                    "type": "Parquet",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": "production",
+                        "fileName": {
+                          "value": "@item()",
+                          "type": "Expression"
+                        }
+                      },
+                      "compressionCodec": "snappy"
+                    },
+                    "schema": [],
+                    "connectionSettings": {
+                      "name": "Bronze_Landing",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "50040fd3-183f-8e17-43de-df7f1aa2af41",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "externalReferences": {
+                          "connection": "a2906aa9-152c-422b-a28d-83f6ff7e0df2"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "data esquema produccion_copy1",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "iterador bbdd a fichero",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "tablas": {
+        "type": "array"
+      }
+    }
+  }
+}
